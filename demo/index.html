@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>录音测试</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div id="app">
+        <button id="start">开始录音</button>
+        <button id="stop">结束录音</button>
+    </div>
+</body>
+<script type="text/javascript" src="./WzRecorder.js"></script>
+<script type="text/javascript">
+const appDiv = document.getElementById('app');
+const start = document.getElementById('start');
+const stop = document.getElementById('stop');
+const recorder = new MP3Recorder();
+console.log(recorder);
+start.addEventListener('click', () => {
+    console.log(1);
+    recorder.start();
+})
+stop.addEventListener('click', () => {
+    recorder.stop();
+})
+recorder.onStart = (data) => {
+    console.log('start');
+}
+recorder.onStop = (data) => {
+    console.log(data);
+    var url = window.URL.createObjectURL(data);
+    const audio = document.createElement('audio');
+    audio.src = url;
+    audio.controls = true;
+    appDiv.appendChild(audio);
+}
+</script>
+
+</html>
